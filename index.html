@@ -1,34 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repositório de Conteúdo</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
-        h1 { color: #333; }
-        .container { display: flex; justify-content: center; gap: 20px; margin-top: 50px; }
-        .button {
-            padding: 20px 40px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 20px;
-        }
-        .button:hover { background-color: #0056b3; }
-    </style>
+    <title>Repositório de Materiais</title>
+    <link rel="stylesheet" href="style.css"> <!-- Se você tiver um estilo personalizado -->
 </head>
 <body>
+    <header>
+        <h1>Repositório de Materiais</h1>
+        <nav>
+            <a href="artigos/index.md" class="button">📖 Artigos</a>
+            <a href="aulas/index.md" class="button">🎓 Aulas</a>
+            <a href="livros/index.md" class="button">📚 Livros</a>
+        </nav>
+    </header>
 
-    <h1>Bem-vindo ao Repositório de Conteúdo!</h1>
-    <p>Escolha uma categoria para explorar:</p>
+    <main>
+        <section>
+            <h2>Bem-vindo ao Repositório</h2>
+            <p>Escolha uma categoria abaixo para acessar os conteúdos:</p>
+        </section>
+    </main>
 
-    <div class="container">
-        <a href="artigos/index.md" class="button">📖 Artigos</a>
-        <a href="aulas/index.md" class="button">🎓 Aulas</a>
-        <a href="livros/index.md" class="button">📚 Livros</a>
-    </div>
-
+    <footer>
+        <p>© 2025 - Repositório de Materiais</p>
+    </footer>
 </body>
 </html>
