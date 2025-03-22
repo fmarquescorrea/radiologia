@@ -1,31 +1,30 @@
-# 📖 Artigos
+# 🎓 Aulas
 
-Aqui estão alguns artigos disponíveis. Clique no título para acessar:
+Aqui estão as aulas disponíveis, divididas por tema:
 
 ## Abdome
-- [Artigo 1 sobre Abdome](./artigo1.pdf)
-- [Artigo 2 sobre Abdome](./artigo2.pdf)
+- [Aula 1 sobre Abdome](./aula1.mp4)
+- [Aula 2 sobre Abdome](./aula2.mp4)
 
 ## Angiologia
-- [Artigo 1 sobre Angiologia](./artigo3.pdf)
+- [Aula 1 sobre Angiologia](./aula3.mp4)
 
 ## Ecografia
-- [Artigo 1 sobre Ecografia](./artigo4.pdf)
-- [Artigo 2 sobre Ecografia](./artigo5.pdf)
+- [Aula 1 sobre Ecografia](./aula4.mp4)
 
 ## Pediatria
-- [Artigo 1 sobre Pediatria](./artigo6.pdf)
+- [Aula 1 sobre Pediatria](./aula5.mp4)
 
 ## Musculoesquelético
-- [Artigo 1 sobre Musculoesquelético](./artigo7.pdf)
+- [Aula 1 sobre Musculoesquelético](./aula6.mp4)
 
 ## Neurologia
-- [Artigo 1 sobre Neurologia](./artigo8.pdf)
+- [Aula 1 sobre Neurologia](./aula7.mp4)
 
 ## Tórax
-- [Artigo 1 sobre Tórax](./artigo9.pdf)
+- [Aula 1 sobre Tórax](./aula8.mp4)
 
 ## Outros
-- [Artigo 1 sobre Outro tema](./artigo10.pdf)
+- [Aula 1 sobre Outro tema](./aula9.mp4)
 
 Voltar para a [página inicial](../index.html).
