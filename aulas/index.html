@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artigos 📖</title>
+    <title>Repositório de Conteúdo</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
         h1 { color: #333; }
-        .list { text-align: left; max-width: 600px; margin: auto; }
-        .list a { display: block; margin: 10px 0; font-size: 18px; text-decoration: none; color: #007bff; }
-        .list a:hover { text-decoration: underline; }
-        .back { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
-        .back:hover { background: #0056b3; }
+        .container { display: flex; justify-content: center; gap: 20px; margin-top: 50px; }
+        .button {
+            padding: 20px 40px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+        .button:hover { background-color: #0056b3; }
     </style>
 </head>
 <body>
 
-    <h1>🎓 Aulas</h1>
-    <p>Selecione uma aula para assistir:</p>
-    
-    <div class="list">
-        <a href="MSK 1 - Tumor do Osso.pdf">▶ Musculoesquelético 1</a>
-        <a href="Tórax 1 - Doenças Eosinofílicas Pulmonares.pdf">▶ Tórax 1</a>
-    </div>
+    <h1>Bem-vindo ao Repositório de Conteúdo!</h1>
+    <p>Escolha uma categoria para explorar:</p>
 
-    <a href="../" class="back">⬅️ Voltar</a>
+    <div class="container">
+        <a href="artigos/index.md" class="button">📖 Artigos</a>
+        <a href="aulas/index.md" class="button">🎓 Aulas</a>
+        <a href="livros/index.md" class="button">📚 Livros</a>
+    </div>
 
 </body>
 </html>
