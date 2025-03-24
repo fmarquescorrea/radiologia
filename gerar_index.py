@@ -19,7 +19,7 @@ for base_dir in base_dirs:
             index_content += "\n📌 *Clique no nome do arquivo para fazer o download ou visualizar diretamente no navegador.*\n"
 
             # Criar/atualizar o index.md
-            with open(os.path.join(pasta_especialidade, "index.md"), "w", encoding="utf-8") as f:
+            with open(os.path.join(pasta_especialidade, ".index.md"), "w", encoding="utf-8") as f:
                 f.write(index_content)
 
 print("Arquivos index.md gerados com sucesso! 🎉")
