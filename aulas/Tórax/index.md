@@ -2,6 +2,7 @@
 
 Aqui estão os arquivos disponíveis nesta categoria:
 
+- [.DS_Store](.DS_Store)
 - [Tórax 1 - Doenças Eosinofílicas Pulmonares.pdf](Tórax 1 - Doenças Eosinofílicas Pulmonares.pdf)
 - [index.md](index.md)
 
