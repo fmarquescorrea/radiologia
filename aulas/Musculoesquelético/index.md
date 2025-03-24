@@ -2,7 +2,6 @@
 
 Aqui estão os arquivos disponíveis nesta categoria:
 
-- [.DS_Store](.DS_Store)
 - [MSK 1 - Tumor do Osso.pdf](MSK 1 - Tumor do Osso.pdf)
 - [index.md](index.md)
 
