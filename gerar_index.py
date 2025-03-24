@@ -9,7 +9,8 @@ for base_dir in base_dirs:
 
         # Verifica se é uma pasta
         if os.path.isdir(pasta_especialidade):
-            arquivos = [f for f in os.listdir(pasta_especialidade) if os.path.isfile(os.path.join(pasta_especialidade, f))]
+            arquivos = [f for f in os.listdir(pasta_especialidade) 
+                        if os.path.isfile(os.path.join(pasta_especialidade, f)) and not f.startswith('.') and f != "index.md"]
 
             # Criar conteúdo do index.md
             index_content = f"# 📂 {especialidade}\n\nAqui estão os arquivos disponíveis nesta categoria:\n\n"
@@ -19,7 +20,7 @@ for base_dir in base_dirs:
             index_content += "\n📌 *Clique no nome do arquivo para fazer o download ou visualizar diretamente no navegador.*\n"
 
             # Criar/atualizar o index.md
-            arquivos = [f for f in os.listdir(caminho_da_pasta) if not f.startswith('.') and f != "index.md"]
+            with open(os.path.join(pasta_especialidade, "index.md"), "w", encoding="utf-8") as f:
                 f.write(index_content)
 
 print("Arquivos index.md gerados com sucesso! 🎉")
