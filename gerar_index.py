@@ -1,7 +1,7 @@
 import os
 
 # Função para gerar o conteúdo do index.html
-def gerar_conteudo_html(titulo, arquivos, tipo, caminho_retorno=""):
+def gerar_conteudo_html(titulo, arquivos, tipo, caminho_retorno_pasta="", caminho_retorno_inicial=""):
     emoji = "📂" if tipo == "categoria" else "📑"
     
     # Adicionar emojis aos botões
@@ -18,7 +18,7 @@ def gerar_conteudo_html(titulo, arquivos, tipo, caminho_retorno=""):
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{titulo}</title>
-        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="../../styles.css">  <!-- Alterado para subir dois níveis -->
     </head>
     <body>
         <header>
@@ -29,24 +29,28 @@ def gerar_conteudo_html(titulo, arquivos, tipo, caminho_retorno=""):
     """
     
     for arquivo in arquivos:
-        if arquivo != "index.html":
+        if arquivo != "index.html" and arquivo != ".DS_Store":  # Ignorar arquivos ocultos
             if tipo == "categoria":
                 emoji = emoji_buttons.get(arquivo.lower(), "")  # Adiciona o emoji apropriado
                 html_content += f'<li><a class="button" href="{arquivo}/index.html">{emoji} {arquivo.capitalize()}</a></li>\n'
             else:
-                html_content += f'<li><a href="{arquivo}">{arquivo}</a></li>\n'
+                html_content += f'<li><a class="button" href="{arquivo}">{emoji} {arquivo}</a></li>\n'
     
     html_content += """
             </ul>
         </main>
     """
     
-    if caminho_retorno:
+    if caminho_retorno_pasta or caminho_retorno_inicial:
         html_content += f"""
         <footer>
-            <a href="{caminho_retorno}">Retornar: {caminho_retorno}</a>
-        </footer>
-        """
+    """
+        if caminho_retorno_pasta:
+            html_content += f'<a class="button" href="{caminho_retorno_pasta}">Retornar à pasta anterior</a><br>\n'
+        if caminho_retorno_inicial:
+            html_content += f'<a class="button" href="{caminho_retorno_inicial}">Retornar à página inicial</a>\n'
+        
+        html_content += "</footer>"
     
     html_content += """
     </body>
@@ -110,11 +114,15 @@ for base_dir in base_dirs:
             arquivos = [f for f in os.listdir(pasta_especialidade) if os.path.isfile(os.path.join(pasta_especialidade, f)) and f != "index.md"]
 
             # Criar o conteúdo para o index.html da subpasta
+            caminho_retorno_pasta = f"../{base_dir}/index.html"  # Link para a pasta anterior
+            caminho_retorno_inicial = "../../index.html"  # Link para a página inicial
+
             index_html_content = gerar_conteudo_html(
                 especialidade.capitalize(), 
                 sorted(arquivos),
                 "subpasta",
-                caminho_retorno=f"../{base_dir}/index.html"
+                caminho_retorno_pasta=caminho_retorno_pasta,  # Link para a pasta anterior
+                caminho_retorno_inicial=caminho_retorno_inicial  # Link para a página inicial
             )
 
             # Criar/atualizar o index.html na subpasta
