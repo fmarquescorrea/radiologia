@@ -68,3 +68,15 @@ body {
     margin: 0; /* Remove a margem padrão */
     padding: 0; /* Remove o padding padrão */
 }
+
+/* Links dentro do arquivos.html */
+.file-link {
+    color: #0077cc;  /* Escolha a cor desejada */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.file-link:hover {
+    color: #ff6600;  /* Cor ao passar o mouse */
+    text-decoration: underline;
+}

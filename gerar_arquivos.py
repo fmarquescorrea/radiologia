@@ -3,12 +3,12 @@ import os
 def gerar_lista_arquivos(caminho_subpasta):
     """Gera um fragmento HTML com a lista de arquivos da subpasta, excluindo indesejados."""
     arquivos = [
-        f'<li><a href="{arquivo}">{arquivo}</a></li>'
+        f'<li><a class="file-link" href="{arquivo}">{arquivo}</a></li>'  # Adicionamos a classe file-link
         for arquivo in sorted(os.listdir(caminho_subpasta))
-        if os.path.isfile(os.path.join(caminho_subpasta, arquivo))  # Garante que é um arquivo
-        and not arquivo.startswith("template_")  # Exclui arquivos de template
-        and not arquivo.startswith(".")  # Exclui arquivos ocultos (como .DS_Store)
-        and arquivo != "arquivos.html"  # Exclui o arquivo arquivos.html
+        if os.path.isfile(os.path.join(caminho_subpasta, arquivo))  
+        and not arquivo.startswith("template_")  
+        and not arquivo.startswith(".")  
+        and arquivo != "arquivos.html"
     ]
     return "\n".join(arquivos)
 
