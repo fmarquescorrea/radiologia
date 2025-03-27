@@ -59,6 +59,14 @@ def gerar_conteudo_html(titulo, arquivos, tipo, caminho_retorno_pasta="", caminh
     return html_content
 
 
+# Função para calcular o caminho relativo da pasta anterior
+def calcular_caminho_retorno_pasta(pasta_atual):
+    """
+    Essa função assume que estamos em uma subpasta diretamente abaixo de 'livros', 'aulas' ou 'artigos',
+    e sempre irá retornar ao diretório pai (subir um nível).
+    """
+    return "../index.html"  # Sempre subir um nível para retornar à pasta anterior
+
 # Diretórios principais
 base_dirs = ["livros", "aulas", "artigos"]
 
@@ -113,10 +121,11 @@ for base_dir in base_dirs:
         if os.path.isdir(pasta_especialidade):
             arquivos = [f for f in os.listdir(pasta_especialidade) if os.path.isfile(os.path.join(pasta_especialidade, f)) and f != "index.md"]
 
-            # Criar o conteúdo para o index.html da subpasta
-            caminho_retorno_pasta = f"../{base_dir}/index.html"  # Link para a pasta anterior
+            # Calcular o caminho de retorno à pasta anterior
+            caminho_retorno_pasta = "../index.html"  # Link para a pasta anterior
             caminho_retorno_inicial = "../../index.html"  # Link para a página inicial
 
+            # Criar o conteúdo para o index.html da subpasta
             index_html_content = gerar_conteudo_html(
                 especialidade.capitalize(), 
                 sorted(arquivos),
