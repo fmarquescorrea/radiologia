@@ -42,9 +42,4 @@ for base_dir in base_dirs:
             with open(index_html_path, "w") as f:
                 f.write(index_content)
 
-            # Garantir que o arquivo index.md seja removido se existir
-            index_md_path = os.path.join(pasta_especialidade, "index.md")
-            if os.path.exists(index_md_path):
-                os.remove(index_md_path)
-
 print("Arquivos index.html gerados com sucesso! 🎉")
