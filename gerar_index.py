@@ -18,7 +18,7 @@ def gerar_conteudo_html(titulo, arquivos, tipo, caminho_retorno_pasta="", caminh
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{titulo}</title>
-        <link rel="stylesheet" href="../../styles.css">  <!-- Alterado para subir dois níveis -->
+        <link rel="stylesheet" href="../../styles.css">
     </head>
     <body>
         <header>
@@ -41,34 +41,19 @@ def gerar_conteudo_html(titulo, arquivos, tipo, caminho_retorno_pasta="", caminh
         </main>
     """
     
-    # Se for subpasta, adicionar o botão para retornar à pasta anterior
-    if caminho_retorno_pasta:
-        html_content += f"""
-        <footer>
-            <a class="button" href="{caminho_retorno_pasta}">Retornar à pasta anterior</a><br>\n
-        """
-    
-    # Adicionar botão fixo para retornar ao "main/index.html"
-    html_content += f"""
-        <a class="button" href="../../index.html">Retornar à página inicial</a><br>\n
-    </footer>
-    
-    """
+    if caminho_retorno_pasta or caminho_retorno_inicial:
+        html_content += "<footer>\n"
+        if caminho_retorno_pasta:
+            html_content += f'<a class="button return-button" href="{caminho_retorno_pasta}">Retornar à pasta anterior</a><br>\n'
+        if caminho_retorno_inicial:
+            html_content += f'<a class="button return-button" href="{caminho_retorno_inicial}">Retornar à página inicial</a>\n'
+        html_content += "</footer>"
     
     html_content += """
     </body>
     </html>
     """
     return html_content
-
-
-# Função para calcular o caminho relativo da pasta anterior
-def calcular_caminho_retorno_pasta(pasta_atual):
-    """
-    Essa função assume que estamos em uma subpasta diretamente abaixo de 'livros', 'aulas' ou 'artigos',
-    e sempre irá retornar ao diretório pai (subir um nível).
-    """
-    return "../index.html"  # Sempre subir um nível para retornar à pasta anterior
 
 # Diretórios principais
 base_dirs = ["livros", "aulas", "artigos"]
@@ -93,12 +78,7 @@ index_html_content = f"""
 
 # Adiciona links para as categorias principais com emojis e botões estilizados
 for base_dir in base_dirs:
-    if base_dir == "livros":
-        emoji = "📚"
-    elif base_dir == "aulas":
-        emoji = "🎓"
-    elif base_dir == "artigos":
-        emoji = "📝"
+    emoji = {"livros": "📚", "aulas": "🎓", "artigos": "📝"}.get(base_dir, "")
     index_html_content += f'<li><a class="button" href="{base_dir}/index.html">{emoji} {base_dir.capitalize()}</a></li>\n'
 
 index_html_content += """
@@ -124,41 +104,36 @@ for base_dir in base_dirs:
         if os.path.isdir(pasta_especialidade):
             arquivos = [f for f in os.listdir(pasta_especialidade) if os.path.isfile(os.path.join(pasta_especialidade, f)) and f != "index.md"]
 
-            # Calcular o caminho de retorno à pasta anterior
-            caminho_retorno_pasta = "../index.html"  # Link para a pasta anterior
-            caminho_retorno_inicial = "../../index.html"  # Link para a página inicial
-
             # Criar o conteúdo para o index.html da subpasta
             index_html_content = gerar_conteudo_html(
                 especialidade.capitalize(), 
                 sorted(arquivos),
                 "subpasta",
-                caminho_retorno_pasta=caminho_retorno_pasta,  # Link para a pasta anterior
-                caminho_retorno_inicial=caminho_retorno_inicial  # Link para a página inicial
+                caminho_retorno_pasta="../index.html",  # Link para a pasta anterior
+                caminho_retorno_inicial="../../index.html"  # Link para a página inicial
             )
 
             # Criar/atualizar o index.html na subpasta
             with open(os.path.join(pasta_especialidade, "index.html"), "w", encoding="utf-8") as f:
                 f.write(index_html_content)
 
-# Criar index.html para cada uma das pastas principais (livros, aulas, artigos)
+# Corrigir botões duplicados nas pastas principais
 for base_dir in base_dirs:
-    base_dir_path = os.path.join(base_dir)
-
-    # Verifica se é uma pasta
-    if os.path.isdir(base_dir_path):
-        arquivos = [f for f in os.listdir(base_dir_path) if os.path.isdir(os.path.join(base_dir_path, f))]
-
-        # Criar o conteúdo para o index.html da pasta principal
-        index_html_content = gerar_conteudo_html(
-            base_dir.capitalize(), 
-            sorted(arquivos),
-            "categoria",
-            caminho_retorno_inicial="../../index.html"  # Link fixo para a página inicial
-        )
-
-        # Criar/atualizar o index.html na pasta principal
-        with open(os.path.join(base_dir, "index.html"), "w", encoding="utf-8") as f:
-            f.write(index_html_content)
+    index_path = os.path.join(base_dir, "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        # Remove qualquer footer existente antes de adicionar o correto
+        content = content.split("<footer>")[0]  
+        content += """
+        <footer>
+        <a class="button return-button" href="../index.html">Retornar à página inicial</a>
+        </footer>
+        </main>
+        </body>
+        </html>
+        """
+        with open(index_path, "w", encoding="utf-8") as f:
+            f.write(content)
 
 print("Todos os arquivos index.html foram gerados com sucesso! 🎉")

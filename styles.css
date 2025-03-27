@@ -36,6 +36,21 @@ header {
     background-color: #0056b3;
 }
 
+.return-button {
+    font-size: 0.9em;
+    background-color: #555; /* Cinza escuro para diferenciar */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.return-button:hover {
+    background-color: #777;
+}
+
 /* Rodapé */
 footer {
     margin-top: 50px;
