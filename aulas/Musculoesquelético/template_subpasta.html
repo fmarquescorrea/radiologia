@@ -4,22 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{titulo}</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Caminho absoluto a partir da raiz -->
+    <link rel="stylesheet" href="../../styles.css">
 </head>
 <body>
     <header>
         <h1>📂 {titulo}</h1>
     </header>
     <main>
-        <ul>
-            <!-- Aqui será inserida a lista de arquivos da subpasta -->
-            {links_arquivos}
+        <ul id="lista-arquivos">
+            <!-- A lista de arquivos será carregada aqui via JavaScript -->
         </ul>
     </main>
     <footer>
-        <li><a class="button" href="livros/livros.html">📚 Livros</a></li>
-        <li><a class="button" href="aulas/aulas.html">🎓 Aulas</a></li>
-        <li><a class="button" href="artigos/artigos.html">📝 Artigos</a></li>
+        <!-- Botão de retorno à pasta principal -->
+        <a class="button return-button" href="../aulas.html">Retornar à pasta principal</a>
+        <a class="button return-button" href="../../index.html">Retornar à página inicial</a>
     </footer>
+
+    <script>
+        // Carregar o conteúdo de arquivos.html
+        fetch('arquivos.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('lista-arquivos').innerHTML = data;
+            })
+            .catch(error => console.log('Erro ao carregar arquivos.html:', error));
+    </script>
 </body>
 </html>
