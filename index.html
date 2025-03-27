@@ -5,20 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repositório de Radiologia</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        // Detecta se estamos no GitHub Pages
-        window.onload = function() {
-            var basePath = window.location.hostname === 'fmarquescorrea.github.io' ? '/radiologia/' : '';
-            var links = document.querySelectorAll('a');
-            
-            links.forEach(function(link) {
-                // Verifica se o link é relativo e ajusta com o caminho correto
-                if (link.href.indexOf('/') === -1) {
-                    link.href = basePath + link.getAttribute('href');
-                }
-            });
-        };
-    </script>
 </head>
 <body>
     <header>
@@ -26,6 +12,7 @@
     </header>
     <main class="categories">
         <ul>
+            <!-- Links para as subpastas -->
             <li><a class="button" href="Livros/Livros.html">📚 Livros</a></li>
             <li><a class="button" href="Aulas/Aulas.html">🎓 Aulas</a></li>
             <li><a class="button" href="Artigos/Artigos.html">📝 Artigos</a></li>
