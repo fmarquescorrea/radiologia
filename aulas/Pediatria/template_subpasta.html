@@ -11,15 +11,24 @@
         <h1>📂 {titulo}</h1>
     </header>
     <main>
-        <ul>
-            <!-- Aqui será inserida a lista de arquivos da subpasta -->
-            {links_arquivos}
+        <ul id="lista-arquivos">
+            <!-- A lista de arquivos será carregada aqui via JavaScript -->
         </ul>
     </main>
     <footer>
-        <!-- Botão de retorno à pasta principal (corrigido para a pasta 'aulas') -->
-        <a class="button return-button" href="/aulas/aulas.html">Retornar à pasta principal</a>
-        <a class="button return-button" href="/index.html">Retornar à página inicial</a>
+        <!-- Botão de retorno à pasta principal -->
+        <a class="button return-button" href="../aulas.html">Retornar à pasta principal</a>
+        <a class="button return-button" href="../../index.html">Retornar à página inicial</a>
     </footer>
+
+    <script>
+        // Carregar o conteúdo de arquivos.html
+        fetch('arquivos.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('lista-arquivos').innerHTML = data;
+            })
+            .catch(error => console.log('Erro ao carregar arquivos.html:', error));
+    </script>
 </body>
 </html>
