@@ -91,7 +91,49 @@ with open("index.html", "w", encoding="utf-8") as f:
 
 # Criar index.html para cada pasta principal e suas subpastas
 for base_dir in base_dirs:
-    for especialidade in os.listdir(base_dir):  
+    # Criar index.html para cada pasta principal
+    index_html_content = f"""
+    <!DOCTYPE html>
+    <html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{base_dir.capitalize()}</title>
+        <style>
+        {css_content}
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>📂 {base_dir.capitalize()}</h1>
+        </header>
+        <div class="categories">
+            <ul>
+    """
+
+    # Adicionar links para as subpastas
+    for especialidade in os.listdir(base_dir):
+        pasta_especialidade = os.path.join(base_dir, especialidade)
+
+        if os.path.isdir(pasta_especialidade):
+            index_html_content += f'<li><a class="button" href="{especialidade}/index.html">{especialidade}</a></li>\n'
+
+    index_html_content += """
+            </ul>
+        </div>
+        <footer>
+            <p>© 2025 Repositório de Radiologia</p>
+        </footer>
+    </body>
+    </html>
+    """
+
+    # Salvar o index.html para a pasta principal
+    with open(os.path.join(base_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(index_html_content)
+
+    # Criar index.html para cada subpasta
+    for especialidade in os.listdir(base_dir):
         pasta_especialidade = os.path.join(base_dir, especialidade)
 
         # Verifica se é uma pasta
