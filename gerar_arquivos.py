@@ -19,9 +19,10 @@ def gerar_fragmento_arquivos(caminho_base):
         if not os.path.isdir(caminho_pasta_raiz):
             continue
         
+        # Aqui, estamos agora iterando pelas subpastas dentro de cada pasta principal
         for subpasta in os.listdir(caminho_pasta_raiz):
             caminho_subpasta = os.path.join(caminho_pasta_raiz, subpasta)
-            if os.path.isdir(caminho_subpasta):
+            if os.path.isdir(caminho_subpasta):  # Somente subpastas são consideradas
                 fragmento_html = gerar_lista_arquivos(caminho_subpasta)
                 caminho_arquivos_html = os.path.join(caminho_subpasta, "arquivos.html")
                 with open(caminho_arquivos_html, "w", encoding="utf-8") as f:
