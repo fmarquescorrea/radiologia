@@ -1,0 +1,44 @@
+/* Reset básico */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #004080;
+    color: white;
+    padding: 20px;
+}
+
+/* Seção principal */
+.categories {
+    margin-top: 50px;
+}
+
+/* Botões estilizados */
+.button {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 30px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Rodapé */
+footer {
+    margin-top: 50px;
+    font-size: 14px;
+    color: #333;
+}
