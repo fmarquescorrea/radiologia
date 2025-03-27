@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repositório de Radiologia</title>
     <link rel="stylesheet" href="styles.css">
-    <base href="/"> <!-- Esta linha garante que todos os links serão relativos à raiz -->
 </head>
+
 <body>
     <header>
         <h1>📂 Repositório de Radiologia</h1>
@@ -21,5 +21,24 @@
     <footer>
         <p>Repositório de Radiologia - 2025</p>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Verifique se o ambiente é GitHub Pages (se o caminho da URL contiver '/docs')
+            let isGitHubPages = window.location.hostname === 'fmarquescorrea.github.io';
+            
+            const links = document.querySelectorAll("a.button");
+            links.forEach(link => {
+                if (isGitHubPages) {
+                    // Ajuste o caminho para GitHub Pages
+                    link.href = link.href.replace("./", "/");
+                } else {
+                    // Certifique-se de que o caminho relativo esteja correto para o Live Server
+                    link.href = "./" + link.href;
+                }
+            });
+        });
+    </script>    
+
 </body>
 </html>
