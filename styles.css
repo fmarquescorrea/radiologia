@@ -57,3 +57,14 @@ footer {
     font-size: 14px;
     color: #333;
 }
+
+/* Estilo para o corpo da página */
+body {
+    background-image: url('imagens/fundo.jpg'); /* Caminho para a sua imagem */
+    background-size: cover; /* A imagem vai cobrir toda a tela */
+    background-position: center; /* Centraliza a imagem */
+    background-attachment: fixed; /* A imagem ficará fixa enquanto a página rola */
+    height: 100vh; /* Garantir que a altura do fundo ocupe toda a altura da tela */
+    margin: 0; /* Remove a margem padrão */
+    padding: 0; /* Remove o padding padrão */
+}
