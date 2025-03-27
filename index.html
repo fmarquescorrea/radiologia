@@ -1,27 +1,50 @@
-<!DOCTYPE html>
-<html lang="pt">
+import os
+
+# Diretórios principais
+base_dirs = ["livros", "aulas", "artigos"]
+
+for base_dir in base_dirs:
+    for especialidade in os.listdir(base_dir):  
+        pasta_especialidade = os.path.join(base_dir, especialidade)
+
+        # Verifica se é uma pasta
+        if os.path.isdir(pasta_especialidade):
+            arquivos = [f for f in os.listdir(pasta_especialidade) if os.path.isfile(os.path.join(pasta_especialidade, f))]
+
+            # Criar conteúdo do index.html
+            index_content = f"""<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repositório de Radiologia</title>
-    <link rel="stylesheet" href="style.css"> <!-- Conectando o CSS -->
+    <title>{especialidade}</title>
 </head>
 <body>
-    <header>
-        <h1>📚 Repositório de Radiologia</h1>
-        <p>Compartilhamento de aulas, artigos e livros</p>
-    </header>
+    <h1>📂 {especialidade}</h1>
+    <p>Aqui estão os arquivos disponíveis nesta categoria:</p>
+    <ul>
+"""
 
-    <main>
-        <section class="categories">
-            <a href="livros/index.html" class="button">📖 Livros</a>
-            <a href="aulas/index.html" class="button">🎓 Aulas</a>
-            <a href="artigos/index.html" class="button">📝 Artigos</a>
-        </section>
-    </main>
+            for arquivo in sorted(arquivos):
+                # Criar links apenas para arquivos, ignorando .index.md e outros arquivos desnecessários
+                if not arquivo.startswith('.') and arquivo != 'index.md':
+                    index_content += f'        <li><a href="{especialidade}/{arquivo}">{arquivo}</a></li>\n'
 
-    <footer>
-        <p>📌 Clique em uma categoria para acessar os materiais</p>
-    </footer>
+            index_content += """
+    </ul>
+    <p>📌 *Clique no nome do arquivo para fazer o download ou visualizar diretamente no navegador.*</p>
 </body>
 </html>
+"""
+
+            # Criar/atualizar o index.html
+            index_html_path = os.path.join(pasta_especialidade, "index.html")
+            with open(index_html_path, "w") as f:
+                f.write(index_content)
+
+            # Garantir que o arquivo index.md seja removido se existir
+            index_md_path = os.path.join(pasta_especialidade, "index.md")
+            if os.path.exists(index_md_path):
+                os.remove(index_md_path)
+
+print("Arquivos index.html gerados com sucesso! 🎉")
