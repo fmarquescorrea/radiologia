@@ -1,35 +1,34 @@
+# gerar_index.py
+
 import os
 
-# Diretórios principais
+# Criar index.html na pasta raiz
+index_html_content = """
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repositório de Radiologia</title>
+</head>
+<body>
+    <h1>📂 Repositório de Radiologia</h1>
+    <ul>
+"""
+
+# Adiciona os links para as categorias principais
 base_dirs = ["livros", "aulas", "artigos"]
-
 for base_dir in base_dirs:
-    # Criar um index.html na própria pasta base
-    index_html_content = f"""
-    <!DOCTYPE html>
-    <html lang="pt">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{base_dir.capitalize()}</title>
-    </head>
-    <body>
-        <h1>📂 {base_dir.capitalize()}</h1>
-        <ul>
-    """
-    subpastas = [f for f in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, f))]
+    index_html_content += f'<li><a href="{base_dir}/index.html">{base_dir.capitalize()}</a></li>\n'
 
-    for subpasta in sorted(subpastas):
-        index_html_content += f'<li><a href="{subpasta}/index.html">{subpasta}</a></li>\n'
+index_html_content += """
+    </ul>
+</body>
+</html>
+"""
 
-    index_html_content += """
-        </ul>
-    </body>
-    </html>
-    """
+# Salvar no arquivo index.html
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(index_html_content)
 
-    # Criar/atualizar o index.html na pasta base
-    with open(os.path.join(base_dir, "index.html"), "w", encoding="utf-8") as f:
-        f.write(index_html_content)
-
-print("Arquivos index.html das pastas principais foram criados com sucesso! 🎉")
+print("Arquivo index.html da pasta raiz gerado com sucesso! 🎉")
