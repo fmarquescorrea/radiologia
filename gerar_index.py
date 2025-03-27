@@ -96,7 +96,7 @@ for base_dir in base_dirs:
 
         # Verifica se é uma pasta
         if os.path.isdir(pasta_especialidade):
-            arquivos = [f for f in os.listdir(pasta_especialidade) if os.path.isfile(os.path.join(pasta_especialidade, f)) and f != "index.md"]
+            arquivos = [f for f in os.listdir(pasta_especialidade) if os.path.isfile(os.path.join(pasta_especialidade, f)) and f != "index.md" and f != "index.html"]
 
             # Criar index.html para cada subpasta
             index_html_content = f"""
