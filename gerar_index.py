@@ -1,55 +1,62 @@
 import os
 
+# Função para gerar o conteúdo do index.html
+def gerar_conteudo_html(titulo, arquivos, tipo, caminho_retorno=""):
+    emoji = "📂" if tipo == "categoria" else "📑"
+    
+    # Adicionar emojis aos botões
+    emoji_buttons = {
+        "livros": "📚",
+        "aulas": "🎓",
+        "artigos": "📝"
+    }
+
+    html_content = f"""
+    <!DOCTYPE html>
+    <html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{titulo}</title>
+        <link rel="stylesheet" href="../styles.css">
+    </head>
+    <body>
+        <header>
+            <h1>{emoji} {titulo}</h1>
+        </header>
+        <main>
+            <ul>
+    """
+    
+    for arquivo in arquivos:
+        if arquivo != "index.html":
+            if tipo == "categoria":
+                emoji = emoji_buttons.get(arquivo.lower(), "")  # Adiciona o emoji apropriado
+                html_content += f'<li><a class="button" href="{arquivo}/index.html">{emoji} {arquivo.capitalize()}</a></li>\n'
+            else:
+                html_content += f'<li><a href="{arquivo}">{arquivo}</a></li>\n'
+    
+    html_content += """
+            </ul>
+        </main>
+    """
+    
+    if caminho_retorno:
+        html_content += f"""
+        <footer>
+            <a href="{caminho_retorno}">Retornar: {caminho_retorno}</a>
+        </footer>
+        """
+    
+    html_content += """
+    </body>
+    </html>
+    """
+    return html_content
+
+
 # Diretórios principais
 base_dirs = ["livros", "aulas", "artigos"]
-
-# Código CSS para o estilo
-css_content = """
-/* Reset básico */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8;
-}
-
-/* Cabeçalho */
-header {
-    background-color: #004080;
-    color: white;
-    padding: 20px;
-}
-
-/* Seção principal */
-.categories {
-    margin-top: 50px;
-}
-
-/* Botões estilizados */
-.button {
-    display: inline-block;
-    margin: 10px;
-    padding: 15px 30px;
-    background-color: #007BFF;
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 8px;
-    transition: 0.3s;
-}
-
-.button:hover {
-    background-color: #0056b3;
-}
-
-/* Rodapé */
-footer {
-    margin-top: 50px;
-    font-size: 14px;
-    color: #333;
-}
-"""
 
 # Criar index.html na pasta raiz
 index_html_content = f"""
@@ -59,27 +66,31 @@ index_html_content = f"""
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repositório de Radiologia</title>
-    <style>
-    {css_content}
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <h1>📂 Repositório de Radiologia</h1>
     </header>
-    <div class="categories">
+    <main class="categories">
         <ul>
 """
 
-# Adiciona links para as categorias principais
+# Adiciona links para as categorias principais com emojis e botões estilizados
 for base_dir in base_dirs:
-    index_html_content += f'<li><a class="button" href="{base_dir}/index.html">{base_dir.capitalize()}</a></li>\n'
+    if base_dir == "livros":
+        emoji = "📚"
+    elif base_dir == "aulas":
+        emoji = "🎓"
+    elif base_dir == "artigos":
+        emoji = "📝"
+    index_html_content += f'<li><a class="button" href="{base_dir}/index.html">{emoji} {base_dir.capitalize()}</a></li>\n'
 
 index_html_content += """
         </ul>
-    </div>
+    </main>
     <footer>
-        <p>© 2025 Repositório de Radiologia</p>
+        <p>Repositório de Radiologia - 2025</p>
     </footer>
 </body>
 </html>
@@ -91,87 +102,20 @@ with open("index.html", "w", encoding="utf-8") as f:
 
 # Criar index.html para cada pasta principal e suas subpastas
 for base_dir in base_dirs:
-    # Criar index.html para cada pasta principal
-    index_html_content = f"""
-    <!DOCTYPE html>
-    <html lang="pt">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{base_dir.capitalize()}</title>
-        <style>
-        {css_content}
-        </style>
-    </head>
-    <body>
-        <header>
-            <h1>📂 {base_dir.capitalize()}</h1>
-        </header>
-        <div class="categories">
-            <ul>
-    """
-
-    # Adicionar links para as subpastas
-    for especialidade in os.listdir(base_dir):
-        pasta_especialidade = os.path.join(base_dir, especialidade)
-
-        if os.path.isdir(pasta_especialidade):
-            index_html_content += f'<li><a class="button" href="{especialidade}/index.html">{especialidade}</a></li>\n'
-
-    index_html_content += """
-            </ul>
-        </div>
-        <footer>
-            <p>© 2025 Repositório de Radiologia</p>
-        </footer>
-    </body>
-    </html>
-    """
-
-    # Salvar o index.html para a pasta principal
-    with open(os.path.join(base_dir, "index.html"), "w", encoding="utf-8") as f:
-        f.write(index_html_content)
-
-    # Criar index.html para cada subpasta
-    for especialidade in os.listdir(base_dir):
+    for especialidade in os.listdir(base_dir):  
         pasta_especialidade = os.path.join(base_dir, especialidade)
 
         # Verifica se é uma pasta
         if os.path.isdir(pasta_especialidade):
-            arquivos = [f for f in os.listdir(pasta_especialidade) if os.path.isfile(os.path.join(pasta_especialidade, f)) and f != "index.md" and f != "index.html"]
+            arquivos = [f for f in os.listdir(pasta_especialidade) if os.path.isfile(os.path.join(pasta_especialidade, f)) and f != "index.md"]
 
-            # Criar index.html para cada subpasta
-            index_html_content = f"""
-            <!DOCTYPE html>
-            <html lang="pt">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>{especialidade}</title>
-                <style>
-                {css_content}
-                </style>
-            </head>
-            <body>
-                <header>
-                    <h1>📂 {especialidade}</h1>
-                </header>
-                <div class="categories">
-                    <ul>
-            """
-
-            for arquivo in sorted(arquivos):
-                index_html_content += f'<li><a class="button" href="{arquivo}">{arquivo}</a></li>\n'
-
-            index_html_content += """
-                    </ul>
-                </div>
-                <footer>
-                    <p>© 2025 Repositório de Radiologia</p>
-                </footer>
-            </body>
-            </html>
-            """
+            # Criar o conteúdo para o index.html da subpasta
+            index_html_content = gerar_conteudo_html(
+                especialidade.capitalize(), 
+                sorted(arquivos),
+                "subpasta",
+                caminho_retorno=f"../{base_dir}/index.html"
+            )
 
             # Criar/atualizar o index.html na subpasta
             with open(os.path.join(pasta_especialidade, "index.html"), "w", encoding="utf-8") as f:
