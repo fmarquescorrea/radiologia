@@ -41,16 +41,19 @@ def gerar_conteudo_html(titulo, arquivos, tipo, caminho_retorno_pasta="", caminh
         </main>
     """
     
-    if caminho_retorno_pasta or caminho_retorno_inicial:
+    # Se for subpasta, adicionar o botão para retornar à pasta anterior
+    if caminho_retorno_pasta:
         html_content += f"""
         <footer>
+            <a class="button" href="{caminho_retorno_pasta}">Retornar à pasta anterior</a><br>\n
+        """
+    
+    # Adicionar botão fixo para retornar ao "main/index.html"
+    html_content += f"""
+        <a class="button" href="../../index.html">Retornar à página inicial</a><br>\n
+    </footer>
+    
     """
-        if caminho_retorno_pasta:
-            html_content += f'<a class="button" href="{caminho_retorno_pasta}">Retornar à pasta anterior</a><br>\n'
-        if caminho_retorno_inicial:
-            html_content += f'<a class="button" href="{caminho_retorno_inicial}">Retornar à página inicial</a>\n'
-        
-        html_content += "</footer>"
     
     html_content += """
     </body>
@@ -137,5 +140,25 @@ for base_dir in base_dirs:
             # Criar/atualizar o index.html na subpasta
             with open(os.path.join(pasta_especialidade, "index.html"), "w", encoding="utf-8") as f:
                 f.write(index_html_content)
+
+# Criar index.html para cada uma das pastas principais (livros, aulas, artigos)
+for base_dir in base_dirs:
+    base_dir_path = os.path.join(base_dir)
+
+    # Verifica se é uma pasta
+    if os.path.isdir(base_dir_path):
+        arquivos = [f for f in os.listdir(base_dir_path) if os.path.isdir(os.path.join(base_dir_path, f))]
+
+        # Criar o conteúdo para o index.html da pasta principal
+        index_html_content = gerar_conteudo_html(
+            base_dir.capitalize(), 
+            sorted(arquivos),
+            "categoria",
+            caminho_retorno_inicial="../../index.html"  # Link fixo para a página inicial
+        )
+
+        # Criar/atualizar o index.html na pasta principal
+        with open(os.path.join(base_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write(index_html_content)
 
 print("Todos os arquivos index.html foram gerados com sucesso! 🎉")
