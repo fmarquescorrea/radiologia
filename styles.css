@@ -80,3 +80,15 @@ body {
     color: #ff5555;  /* Cor ao passar o mouse */
     text-decoration: underline;
 }
+
+/* Remove marcadores de lista */
+ul {
+    list-style-type: none;
+    padding-left: 0; /* Remove espaçamento padrão */
+}
+
+/* remove marcadores de listas chamdas com a função <li. */
+li {
+    display: flex;
+    align-items: center;
+}
