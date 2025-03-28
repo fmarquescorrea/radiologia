@@ -56,6 +56,10 @@ footer {
     margin-top: 50px;
     font-size: 14px;
     color: #333;
+    display: flex;
+    flex-direction: column; /* Alinha os botões verticalmente */
+    align-items: center; /* Centraliza os botões */
+    gap: 10px; /* Adiciona espaçamento entre os botões */
 }
 
 /* Estilo para o corpo da página */
