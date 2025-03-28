@@ -81,14 +81,16 @@ body {
     text-decoration: underline;
 }
 
-/* Remove marcadores de lista */
+/* Remove os marcadores da lista */
 ul {
     list-style-type: none;
-    padding-left: 0; /* Remove espaçamento padrão */
+    padding-left: 0;
 }
 
-/* remove marcadores de listas chamdas com a função <li. */
-li {
+/* Centraliza os botões e links */
+ul li {
     display: flex;
-    align-items: center;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    margin: 10px 0; /* Adiciona espaçamento entre os itens */
 }
