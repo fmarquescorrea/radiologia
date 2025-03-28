@@ -75,13 +75,13 @@ body {
 
 /* Links dentro do arquivos.html */
 .file-link {
-    color: #fff64d;  /* Escolha a cor desejada */
+    color: #000000;  /* Escolha a cor desejada */
     text-decoration: none;
     font-weight: bold;
 }
 
 .file-link:hover {
-    color: #ff5555;  /* Cor ao passar o mouse */
+    color: #ac24af;  /* Cor ao passar o mouse */
     text-decoration: underline;
 }
 
