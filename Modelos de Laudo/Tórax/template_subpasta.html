@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregando...</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <header>
+        <h1 id="titulo-pagina">📂 Carregando...</h1>
+    </header>
+    <main>
+        <ul id="lista-arquivos">
+            <!-- A lista de arquivos será carregada aqui via JavaScript -->
+        </ul>
+    </main>
+    <footer>
+        <!-- Botão de retorno à pasta principal -->
+        <a class="button return-button" href="../Livros.html">Retornar à pasta principal</a>
+        <a class="button return-button" href="../../index.html">Retornar à página inicial</a>
+    </footer>
+
+    <script>
+        // Função para extrair a pasta e a subpasta do caminho atual
+        function obterTitulo() {
+            let caminho = window.location.pathname.split('/').filter(p => p);
+            
+            // Remove o nome do arquivo (ex: template_subpasta.html)
+            if (caminho[caminho.length - 1].includes('.html')) {
+                caminho.pop();
+            }
+
+            let pasta = caminho[caminho.length - 2] || "Desconhecido";
+            let subpasta = caminho[caminho.length - 1] || "Desconhecido";
+            
+            return `${pasta} - ${subpasta}`;
+        }
+
+        // Decodifica o nome das pastas para corrigir caracteres especiais
+        function decodificarTexto(texto) {
+            return decodeURIComponent(texto);
+        }
+
+        // Atualiza o título da página
+        let tituloFormatado = decodificarTexto(obterTitulo());
+        document.title = tituloFormatado;
+        document.getElementById("titulo-pagina").innerText = `📂 ${tituloFormatado}`;
+
+        // Carregar o conteúdo de arquivos.html
+        fetch('arquivos.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('lista-arquivos').innerHTML = data;
+            })
+            .catch(error => console.log('Erro ao carregar arquivos.html:', error));
+    </script>
+</body>
+</html>
