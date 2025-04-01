@@ -64,7 +64,7 @@ footer {
 
 /* Estilo para o corpo da página */
 body {
-    background-image: url('imagens/fundo.jpg'); /* Caminho para a sua imagem */
+    /* background-image: url('imagens/fundo.jpg'); /* Caminho para a sua imagem */
     background-size: cover; /* A imagem vai cobrir toda a tela */
     background-position: center; /* Centraliza a imagem */
     background-attachment: fixed; /* A imagem ficará fixa enquanto a página rola */
